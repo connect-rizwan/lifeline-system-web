@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base href="$FLUTTER_BASE_HREF">
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="description" content="A new Flutter project.">
+  
+  <!-- iOS meta tags & icons -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="lifeline_system_website">
+  <link rel="apple-touch-icon" href="icon.jpeg">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/jpeg" href="icon.jpeg"/>
+  
+  <title>lifeline_system_website</title>
+  <link rel="manifest" href="manifest.json">
+  
+  <style>
+    /* Modern Preloader Styles */
+    #preloader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #f8f9fa;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      transition: opacity 0.5s ease-out;
+    }
+    
+    .preloader-logo {
+      width: 180px;
+      margin-bottom: 30px;
+      opacity: 0;
+      animation: fadeIn 0.6s ease-out forwards;
+    }
+    
+    .progress-container {
+      width: 250px;
+      height: 4px;
+      background: rgba(0, 0, 0, 0.1);
+      border-radius: 2px;
+      overflow: hidden;
+      position: relative;
+      margin-bottom: 25px;
+    }
+    
+    .progress-bar {
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 0;
+      background: linear-gradient(90deg, #0066cc, #004d99);
+      border-radius: 2px;
+      transition: width 0.4s cubic-bezier(0.65, 0, 0.35, 1);
+    }
+    
+    .loading-text {
+      font-family: 'Segoe UI', Roboto, sans-serif;
+      color: #333;
+      font-size: 14px;
+      font-weight: 500;
+      margin-top: 15px;
+      text-align: center;
+      max-width: 280px;
+      line-height: 1.5;
+    }
+    
+    .spinner {
+      width: 50px;
+      height: 50px;
+      margin-bottom: 25px;
+      position: relative;
+      opacity: 0;
+      animation: fadeIn 0.6s ease-out 0.2s forwards;
+    }
+    
+    .spinner-circle {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border: 3px solid transparent;
+      border-top-color: #0066cc;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    
+    .spinner-circle:nth-child(2) {
+      border-top-color: #004d99;
+      animation-delay: 0.2s;
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .percentage {
+      font-family: 'Segoe UI', Roboto, sans-serif;
+      font-weight: 600;
+      color: #0066cc;
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Modern Preloader -->
+  <div id="preloader">
+    <img src="top_logo.png" class="preloader-logo" alt="LifeLine System">
+    <div class="spinner">
+      <div class="spinner-circle"></div>
+      <div class="spinner-circle"></div>
+    </div>
+    <div class="percentage">0%</div>
+    <div class="progress-container">
+      <div class="progress-bar"></div>
+    </div>
+    <div class="loading-text">Preparing your LifeLine security system...</div>
+  </div>
+  
+  <script src="flutter_bootstrap.js" async></script>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const preloader = document.getElementById('preloader');
+      const progressBar = document.querySelector('.progress-bar');
+      const percentage = document.querySelector('.percentage');
+      const loadingText = document.querySelector('.loading-text');
+      
+      const messages = [
+        "Initializing security protocols...",
+        "Connecting to LifeLine services...",
+        "Optimizing system performance...",
+        "Almost ready..."
+      ];
+      
+      let progress = 0;
+      const interval = setInterval(() => {
+        progress += Math.random() * 8 + 2;
+        if (progress > 100) progress = 100;
+        
+        progressBar.style.width = progress + '%';
+        percentage.textContent = Math.floor(progress) + '%';
+        
+        // Update messages based on progress
+        if (progress < 30) {
+          loadingText.textContent = messages[0];
+        } else if (progress < 60) {
+          loadingText.textContent = messages[1];
+        } else if (progress < 85) {
+          loadingText.textContent = messages[2];
+        } else {
+          loadingText.textContent = messages[3];
+        }
+        
+        if (progress >= 100) {
+          clearInterval(interval);
+        }
+      }, 300);
+      
+      window.addEventListener('flutter-first-frame', function() {
+        clearInterval(interval);
+        progressBar.style.width = '100%';
+        percentage.textContent = '100%';
+        loadingText.textContent = "LifeLine System ready!";
+        
+        setTimeout(() => {
+          preloader.style.opacity = '0';
+          setTimeout(() => {
+            preloader.style.display = 'none';
+          }, 500);
+        }, 800);
+      });
+    });
+  </script>
+</body>
+</html>
