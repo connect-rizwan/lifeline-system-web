@@ -4,10 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import 'providers/theme_provider.dart';
-import 'screens/app_screen.dart';
-import 'screens/contact_screen.dart';
 import 'screens/home_screen.dart';
-import 'screens/products_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -60,23 +57,23 @@ final _router = GoRouter(
         child: const HomeScreen(),
       ),
     ),
-    GoRoute(
-      path: '/products',
-      builder: (context, state) => SelectableRegion(
-          selectionControls: MaterialTextSelectionControls(),
-          child: const ProductsScreen()),
-    ),
-    GoRoute(
-      path: '/app',
-      builder: (context, state) => SelectableRegion(
-          selectionControls: MaterialTextSelectionControls(),
-          child: const AppScreen()),
-    ),
-    GoRoute(
-      path: '/contact',
-      builder: (context, state) => SelectableRegion(
-          selectionControls: MaterialTextSelectionControls(),
-          child: const ContactScreen()),
-    ),
+    // GoRoute(
+    //   path: '/products',
+    //   builder: (context, state) => SelectableRegion(
+    //       selectionControls: MaterialTextSelectionControls(),
+    //       child: const ProductsScreen()),
+    // ),
+    // GoRoute(
+    //   path: '/app',
+    //   builder: (context, state) => SelectableRegion(
+    //       selectionControls: MaterialTextSelectionControls(),
+    //       child: const AppScreen()),
+    // ),
+    // GoRoute(
+    //   path: '/contact',
+    //   builder: (context, state) => SelectableRegion(
+    //       selectionControls: MaterialTextSelectionControls(),
+    //       child: const ContactScreen()),
+    // ),
   ],
 );

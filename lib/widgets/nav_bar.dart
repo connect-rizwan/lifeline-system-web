@@ -126,7 +126,7 @@ class _NavBarState extends State<NavBar> {
           horizontal: ResponsiveHandler.isTablet(context) ? 8 : 12,
         ),
         child: GestureDetector(
-          onTap: () => GoRouter.of(context).go(route),
+          // onTap: () => GoRouter.of(context).go(route),
           child: Text(
             label,
             style: GoogleFonts.inter(
